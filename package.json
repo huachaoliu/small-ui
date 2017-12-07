@@ -1,12 +1,8 @@
 {
-  "name": "minui",
+  "name": "small-ui",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "python -m SimpleHTTPServer 12000"
-  },
-  "author": "",
-  "license": "ISC"
+  "repository": "https://github.com/huachaoliu/small-ui.git",
+  "author": "刘华超 <huachao.liu@daxiangyun.com>",
+  "license": "MIT"
 }
