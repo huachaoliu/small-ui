@@ -1,0 +1,13 @@
+{
+  "presets": [
+    "env"
+  ],
+  "plugins": [
+    "react-hot-loader/babel",
+    "add-module-exports",
+    ["transform-runtime", {
+      "helpers": false,
+      "polyfill": false
+    }]
+  ]
+}
