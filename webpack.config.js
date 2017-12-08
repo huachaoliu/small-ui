@@ -78,19 +78,19 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     // new webpack.NamedModulesPlugin(),
     // 当模块热替换（HMR）时在浏览器控制台输出对用户更友好的模块名字信息
-
+    // new webpack.LoaderOptionsPlugin({
+    //   options: {
+    //     postcss: function () {
+    //       return [
+    //         require("autoprefixer")({
+    //           browsers: ['ie>=11', '>1% in CN']
+    //         })
+    //       ]
+    //     }
+    //   }
+    // }),
     new ExtractTextPlugin('[name].css', { allChunks: true }), // 单独打包CSS
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: function () {
-          return [
-            require("autoprefixer")({
-              browsers: ['ie>=11', '>1% in CN']
-            })
-          ]
-        }
-      }
-    }),
+    
     /**
 		* HTML文件编译，自动引用JS/CSS
 		* 
