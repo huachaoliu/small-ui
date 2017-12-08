@@ -1,28 +1,34 @@
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const props = [];
+for (let p in webpack) {
+  props.push(`${p}\n`);
+}
+fs.writeFileSync('./test.json', props);
 // const commonsPlugin = new webpack.optimize.CommonsChunkPlugin(/* chunkName= */'common', /* filename= */'common.js')
 module.exports = {
   entry: [
     // 'react-hot-loader/patch',
     // 开启react代码的模块热替换（HMR）
- 
+
     // 'webpack-dev-server/client?http://localhost:10000',
     // 为webpack-dev-server的环境打包好运行代码
     // 然后连接到指定服务器域名与端口
- 
+
     'webpack/hot/only-dev-server',
     // 为热替换（HMR）打包好运行代码
     // only- 意味着只有成功更新运行代码才会执行热替换（HMR）
- 
+
     './src/index.js'
     // 我们app的入口文件
   ],
   // context: path.resolve(__dirname, '/'),
-  
+
   devtool: 'inline-source-map',
 
   output: {
@@ -72,9 +78,19 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     // new webpack.NamedModulesPlugin(),
     // 当模块热替换（HMR）时在浏览器控制台输出对用户更友好的模块名字信息
-    
+
     new ExtractTextPlugin('[name].css', { allChunks: true }), // 单独打包CSS
-    
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: function () {
+          return [
+            require("autoprefixer")({
+              browsers: ['ie>=11', '>1% in CN']
+            })
+          ]
+        }
+      }
+    }),
     /**
 		* HTML文件编译，自动引用JS/CSS
 		* 
